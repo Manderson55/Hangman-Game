@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE-edge">
+  <meta name ="viewport" content="width=device-width, initial-scale= 1"></meta>
+  <title>Bootstrap Hangman Game</title>
+
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+<!-- progress bar code <div class="progress progress-striped active">
+  <div class="progress-bar" style="width: 45%"></div>
+</div> -->
+
+	<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/spacelab/bootstrap.min.css" rel="stylesheet" integrity="sha384-L/tgI3wSsbb3f/nW9V6Yqlaw3Gj7mpE56LWrhew/c8MIhAYWZ/FNirA64AVkB5pI" crossorigin="anonymous">
+
+
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+ <script type="text/javascript" src="assets/javascript/game.js"></script>
+ 
+</head>
+<body>
+
+<div class = "container-fluid">
+
+	<div class = "header clearfix">
+	</div>
+
+	<div class = "jumbotron">	
+		<h1>Hangman</h1>
+		<input type = "button" value = "Start Playing!" class = "btn btn-success btn-lg" onclick= "startGame()"></>
+		<button id="mySong" type = "button" class = "btn btn-warning btn-lg" onclick = "playMusic()">Play "Hangman BY Peter, Paul, and Mary</button>
+		<button id="pause" type = "button" class = "btn btn-warning btn-small" onclick = "pauseMusic()">Pause Music</button>
+	</div>
+</div>
+
+<div class = "container">
+
+	<div class="row">
+		<div class = "col-md-6">
+			<img class="" id="hmStickFigure" src="assets/images/hm0.png">
+	
+		</div>
+
+		<div class = "col-md-6">
+			<h2>Guess the Name of the Flower!</h2>
+			<p id="dashWord"></p>
+			<h2 id="wins">Wins: 0 </h2>
+			<h2 id="losses">Losses: 0</h2>
+			<h2 id="guessesLeft">Guesses Left: 12 </h2>
+			<h2 id="guesses">Guesses this Game:</h2>
+			<h2 id="answer"></h2>		
+		</div>
+
+	</div>	
+
+ 
+</div>
+
+
+ 
+
+</body>
+
+</html>
