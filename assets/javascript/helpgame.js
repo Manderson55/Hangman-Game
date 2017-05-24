@@ -31,19 +31,6 @@ function pauseMusic(){
 	audioElement.pause();
 }
 
-function startGame() { /* this is what happens when user clicks start game button */
-	guessesLeft = 12;
-	var numberGuessesLeft = document.getElementById("guessesLeft");             /*  print userGuess on page  */	
-	numberGuessesLeft.innerHTML = "Guesses Left: " + guessesLeft;	
-	guessesThisGame = [];
-	var guessedLetters = document.getElementById("guesses");             /*  print userGuess on page  */	
-	guessedLetters.innerHTML = "Guesses this game: " + guessesThisGame;	 
-    lettersGuessed= 0;
-	wrongLetters = 0;
-	flowerSplit = [];
-	document.getElementById("hmStickFigure").src = "assets/images/hm0.png";
-	pickElement();
-}
 
 function pickElement(){
 	flowerGuess = flowers[Math.floor(Math.random() * flowers.length)]; /* pick a randon flower */
@@ -53,104 +40,95 @@ function pickElement(){
 	flowerDashes = flowerGuess.replace(/[a-z]/g, " ___ "); /* replace the letters with dashes */	
 	printDashWord = document.getElementById("dashWord"); /* print the word in dashes in the window */
 	printDashWord.innerHTML = flowerDashes;
-	console.log(flowerDashes);
 }
 
-document.onkeyup = function(event) { /*when user clicks a letter */
 
+function startGame() { /* this is what happens when user clicks start game button */
+	pickElement();
+}
 
-	userGuess = event.key;
+document.onkeyup = function(event) { /*when user clicks the start button */
+
+	var userGuess = event.key;  /* set userGuess to the key the user pressed */
+	guessesLeft--;      /* subtract 1 from guessesLeft */
+	document.getElementById("guessesLeft").innerHTML  =  "Guesses Left: " + guessesLeft; /*  print userGuess on page  */ 
+	
 	guessesThisGame.push(userGuess); /* push the letter to the array */
 	console.log("Guesses this game "  + guessesThisGame);
 	var guessedLetters = document.getElementById("guesses");             /*  print userGuess on page  */	
 	guessedLetters.innerHTML = "Guesses this game: " + guessesThisGame;	 
 
-	guessesLeft--;
-
-	if (flowerSplit.includes(userGuess)){
-		console.log("letter is in word!");
-		lettersGuessed ++;
-		for (var i=0; i < flowerSplit.length; i++) {
-			
-			if (flowerSplit[i] == userGuess) {
-					output[i] = userGuess;
-				/*	output += " " + userGuess + " "; */
+	if (guessesLeft > 0) {
+		letterInWord = false; /* set boolean to false = letter is not in the word */
+		if (flowerSplit.includes(userGuess)){
+			letterInWord = true; /* reset boolean to TRUE = letter is in the word 	*/
+			console.log(letterInWord);
+			for (var i = 0; i < flowerSplit.length; i++) { 
+				if (flowerSplit[i] == userGuess) {
+					output += " " + userGuess + " ";
 					console.log(output);
-
-				}			 
+					lettersGuessed ++;
+					console.log(lettersGuessed);
+				} 
+				else {
+					output += " ___ ";
+					console.log(output);
+				}
+			}
 		}
-		if (lettersGuessed == flowerSplit.length){
-			console.log(lettersGuessed, flowerSplit.length);
-			wins++;
-			document.getElementById("hmStickFigure").src = "assets/images/hm12Win.png";
-			alert("You guessed the Flower!");
-		}
-
-
-	} 
-	else {
-			console.log("letter is not in word");
-			lettersGuessed++;
+		else {
 			wrongLetters++;
-			console.log (lettersGuessed);
-			console.log(wrongLetters);
-			changeImage();
+		}
+	};
+
 	}
+		
+	for (var i = 0; i < flowerSplit.length; i++) { 
+			if (flowerSplit[i] == userGuess) {
+				output += " " + userGuess + " ";
+			} 
+			else {
+				output += "___";				
+			}
+	} /* end of for loop */
 
 
-	
-	
-	if (guessesLeft == 0){
-		losses++;
-		document.getElementById("hmStickFigure").src = "assets/images/hm12Loss.png";
-		alert("You are a looser!");
-	} 
 
-	var numberGuessesLeft = document.getElementById("guessesLeft");             /*  print userGuess on page  */	
-	numberGuessesLeft.innerHTML = "Guesses Left: " + guessesLeft;	
-
-	
-	printDashWord = document.getElementById("dashWord"); /* print the word in dashes in the window */
-	printDashWord.innerHTML = flowerDashes;
-	console.log(flowerDashes);
-
-
-}	/* end of onkeyup event */
 
 
 
 function changeImage() {
-	if (wrongLetters == 1) {
+	if (lettersMissed == 1) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm1.png";
 	}
-	else if (wrongLetters == 2) {
+	else if (lettersMissed == 2) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm2.png";
 	}
-	else if (wrongLetters == 3) {
+	else if (lettersMissed == 3) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm3.png";
 	}
-	else if (wrongLetters == 4) {
+	else if (lettersMissed == 4) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm4.png";
 	}
-	else if (wrongLetters == 5) {
+	else if (lettersMissed == 5) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm5.png";
 	}
-	else if (wrongLetters == 6) {
+	else if (lettersMissed == 6) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm6.png";
 	}	
-	else if (wrongLetters == 7) {
+	else if (lettersMissed == 7) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm7.png";
 	}
-	else if (wrongLetters == 8) {
+	else if (lettersMissed == 8) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm8.png";
 	}
-	else if (wrongLetters == 9) {
+	else if (lettersMissed == 9) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm9.png";
 	}	
-	else if (wrongLetters == 10) {
+	else if (lettersMissed == 10) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm10.png";
 	}
-	else if (wrongLetters == 11) {
+	else if (lettersMissed == 11) {
 		document.getElementById("hmStickFigure").src = "assets/images/hm11.png";
 	}
 	else {
